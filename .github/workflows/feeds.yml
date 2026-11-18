@@ -1,0 +1,19 @@
+# One journal per line: <output file> <print ISSN,online ISSN> <feed title> [| filter]
+# The filter (optional): a keyword file and/or comma-separated terms,
+# e.g. "| glaciology.txt" or "| glaciology.txt, albedo". Put "#" in front of a line to disable it.
+# The feed will be available at https://<user>.github.io/<repository>/<output file>
+
+# Glaciology journals: everything is kept
+journal-of-glaciology.xml 0022-1430,1727-5652 Journal of Glaciology
+annals-of-glaciology.xml 0260-3055,1727-5644 Annals of Glaciology
+
+# Broader journals: glaciology articles only
+grl-glacio.xml 0094-8276,1944-8007 Geophysical Research Letters (glaciology) | glaciology.txt
+rse-glacio.xml 0034-4257 Remote Sensing of Environment (glaciology) | glaciology.txt
+jgr-es-glacio.xml 2169-9003,2169-9011 JGR Earth Surface (glaciology) | glaciology.txt
+crst-glacio.xml 0165-232X Cold Regions Science and Technology (glaciology) | glaciology.txt
+jhm-glacio.xml 1525-755X,1525-7541 Journal of Hydrometeorology (glaciology) | glaciology.txt
+essd-glacio.xml 1866-3508,1866-3516 Earth System Science Data (glaciology) | glaciology.txt
+isprs-glacio.xml 0924-2716 ISPRS J. Photogrammetry and Remote Sensing (glaciology) | glaciology.txt
+amt-glacio.xml 1867-1381,1867-8548 Atmospheric Measurement Techniques (glaciology) | glaciology.txt
+aaar-glacio.xml 1523-0430,1938-4246 Arctic, Antarctic, and Alpine Research (glaciology) | glaciology.txt
