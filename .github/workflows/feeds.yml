@@ -1,19 +1,42 @@
-# One journal per line: <output file> <print ISSN,online ISSN> <feed title> [| filter]
-# The filter (optional): a keyword file and/or comma-separated terms,
-# e.g. "| glaciology.txt" or "| glaciology.txt, albedo". Put "#" in front of a line to disable it.
-# The feed will be available at https://<user>.github.io/<repository>/<output file>
+name: Sorted RSS feeds
 
-# Glaciology journals: everything is kept
-journal-of-glaciology.xml 0022-1430,1727-5652 Journal of Glaciology
-annals-of-glaciology.xml 0260-3055,1727-5644 Annals of Glaciology
+on:
+  schedule:
+    - cron: "17 5 * * *"   # every day around 6-7 am (Paris time)
+  workflow_dispatch:       # "Run workflow" button to run it manually
+  push:
+    branches: [main]
 
-# Broader journals: glaciology articles only
-grl-glacio.xml 0094-8276,1944-8007 Geophysical Research Letters (glaciology) | glaciology.txt
-rse-glacio.xml 0034-4257 Remote Sensing of Environment (glaciology) | glaciology.txt
-jgr-es-glacio.xml 2169-9003,2169-9011 JGR Earth Surface (glaciology) | glaciology.txt
-crst-glacio.xml 0165-232X Cold Regions Science and Technology (glaciology) | glaciology.txt
-jhm-glacio.xml 1525-755X,1525-7541 Journal of Hydrometeorology (glaciology) | glaciology.txt
-essd-glacio.xml 1866-3508,1866-3516 Earth System Science Data (glaciology) | glaciology.txt
-isprs-glacio.xml 0924-2716 ISPRS J. Photogrammetry and Remote Sensing (glaciology) | glaciology.txt
-amt-glacio.xml 1867-1381,1867-8548 Atmospheric Measurement Techniques (glaciology) | glaciology.txt
-aaar-glacio.xml 1523-0430,1938-4246 Arctic, Antarctic, and Alpine Research (glaciology) | glaciology.txt
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate feeds from Crossref
+        env:
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
+        run: python crossref_feed.py feeds.txt public
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
