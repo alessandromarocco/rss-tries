@@ -1,0 +1,38 @@
+# Glaciology terms used to filter general-interest journals.
+# One term per line, matched at the start of a word in the title and abstract,
+# case-insensitive: "glaci" matches glacier, glacial, glaciology…
+# Add "$" at the end to require a whole word. "#" comments out a line.
+
+# Glaciers and ice caps
+glaci
+subglaci
+englaci
+supraglaci
+proglaci
+deglaci
+ice sheet
+ice shel
+ice cap$
+ice caps$
+ice stream
+icefield
+ice field
+ice core
+ice flow$
+ice dynamic
+ice mass
+iceberg
+calving
+crevasse
+nunatak
+
+# Snow and firn
+firn
+névé
+neve$
+snow
+cryospher
+
+sea ice
+permafrost
+albedo
