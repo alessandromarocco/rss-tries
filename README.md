@@ -28,7 +28,7 @@ The script then scans its 1000 latest articles and keeps only the glaciology one
 
 ## Setup (once) on another repository
 
-1. Create a **public** repository on GitHub () and add `crossref_feed.py`,
+1. Create a **public** repository on GitHub and add `crossref_feed.py`,
    `feeds.txt`, `glaciology.txt` and `.github/workflows/feeds.yml` (keeping this path).
 2. *Settings → Pages → Build and deployment → Source*: choose **GitHub Actions**.
 3. (Recommended) *Settings → Secrets and variables → Actions → **Secrets** tab → New repository
